@@ -18,7 +18,7 @@
 			?>
 			<tr>
 				<td><?=$item['quantity'];?></td>
-				<td><?=substr($product['title'],0,15);?></td>
+				<td><?=$product['title'];?></td>
 				<td>₹<?=$item['quantity']*$product['price'];?></td>
 
 			</tr>

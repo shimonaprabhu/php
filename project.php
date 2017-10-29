@@ -21,15 +21,21 @@
 
 				<div class="col-md-3">
 				<h4 class="text-center"><?=$product['title'];?></h4>
-					<img src="<?=$product['image'];?>" alt="<?=$product['title'];?>" class="img-thumb"/>
-					<br/>
-					<br/>
+				<br>
+					<img src="<?=$product['image'];?>" alt="<?=$product['title'];?>" class="img-thumb" style="height:200px ;width:200px ;"/>
+					<br>
+					<br>
+					<br>
 
 					<p class="list-price text-danger text-center">List Price<s>₹<?=$product['list_price'];?></s></p>
 
 					<p class="price text-center"> Our Price: ₹<?=$product['price'];?></p>
 					<button type="button" class="btn btn-sm btn-success center-block" onclick="detailsmodal(<?=$product['id'];?>)">Details</button>
+				<br>
+				<br>
+				<br>
 				</div>
+
 				<?php endwhile;?>
 			</div>
 		</div>

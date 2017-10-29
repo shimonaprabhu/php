@@ -87,7 +87,7 @@ if ($cart_id!='') {
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="checkoutModalLabel">Shipping Address</h5>
+        <h3 class="modal-title" id="checkoutModalLabel">Shipping Address</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -113,45 +113,64 @@ if ($cart_id!='') {
 	       			</div>
 	       			<div class="form-group col-md-6">
 	       				<label for="street">Street Adress:</label>
-	       				<input class="form-control" name="street" id="street" type="text" data-stripe="address_line1">
+	       				<input class="form-control" name="street" id="street" type="text">
 	       			</div>
 	       			<div class="form-group col-md-6">
 	       				<label for="street2">Street Adress 2:</label>
-	       				<input class="form-control" name="street2" id="street2" type="text" data-stripe="address_line2">
+	       				<input class="form-control" name="street2" id="street2" type="text">
 	       			</div>
 	       			<div class="form-group col-md-6">
 	       				<label for="city">City:</label>
-	       				<input class="form-control" name="city" id="city" type="text" data-stripe="address_city">
+	       				<input class="form-control" name="city" id="city" type="text">
 	       			</div>
 	       			<div class="form-group col-md-6">
 	       				<label for="state">State:</label>
-	       				<input class="form-control" name="state" id="state" type="text" data-stripe="address_state">
+	       				<input class="form-control" name="state" id="state" type="text">
 	       			</div>
 	       			<div class="form-group col-md-6">
 	       				<label for="zip_code">Zip Code:</label>
-	       				<input class="form-control" name="zip_code" id="zip_code" type="text" data-stripe="address_zip">
+	       				<input class="form-control" name="zip_code" id="zip_code" type="text">
 	       			</div>
 	       			<div class="form-group col-md-6">
 	       				<label for="country">Country:</label>
-	       				<input class="form-control" name="country" id="country" type="text" data-stripe="address_country">
+	       				<input class="form-control" name="country" id="country" type="text">
 	       			</div>
 	       		</div>
+	       		<div id="step3" style="display: none;">
+	       		<div class="row">
+	       			<div class="form-group col-md-3" id="payment_gate" style="margin:10px;">
+	       				<h5>Cash on Delivery:</h5>
+	       			</div>
+	       			<div class="form-group col-md-3">
+	       				<input type="radio" id="cod" class="form-control" name="radio">
+	       			</div>
+	       		</div>
+	       		<div class="row">
+	       			<div class="form-group col-md-3" id="payment_gate" style="margin:10px;">
+	       				<h5>Credit Card:</h5>
+	       			</div>
+	       			<div class="form-group col-md-3">
+	       				<input type="radio" id="cc" class="form-control" name="radio">
+	       			</div>
+	       		</div>	
+	       		</div>
+	       		
 	       		<div id="step2" style="display: none;">
 	       			<div class="form-group col-md-3">
 	       				<label for="name">Name on card:</label>
-	       				<input type="text" id="name" class="form-control" data-stripe="name">
+	       				<input type="text" id="name" name="name" class="form-control">
 	       			</div>
 	       			<div class="form-group col-md-3">
 	       				<label for="number">Card Number:</label>
-	       				<input type="text" id="number" class="form-control" data-stripe="number">
+	       				<input type="text" id="number" name="number" class="form-control">
 	       			</div>
 	       			<div class="form-group col-md-3">
 	       				<label for="cvc">CVC:</label>
-	       				<input type="text" id="cvc" class="form-control" data-stripe="cvc">
+	       				<input type="text" id="cvc" name="cvc" class="form-control">
 	       			</div>
 	       			<div class="form-group col-md-2">
 	       				<label for="exp-month">Expire Month:</label>
-	       				<select id="exp-month" class="form-control" data-stripe="exp_month">
+	       				<select id="exp-month" name="exp-month" class="form-control">
 	       					<option value=""></option>
 	       					<?php for($i=1;$i<13;$i++):?>
 	       						<option value="<?=$i;?>"><?=$i;?></option>
@@ -161,7 +180,7 @@ if ($cart_id!='') {
 	       			
 	       			<div class="form-group col-md-2">
 	       				<label for="exp-years">Expire Year:</label>
-	       				<select id="exp-year" class="form-control" data-stripe="exp_year">
+	       				<select id="exp-year" name="exp-year" class="form-control">
 	       					<option value=""></option>
 	       					<?php $yr=date("Y");?>
 	       					<?php for($i=0;$i<11;$i++):?>
@@ -170,14 +189,18 @@ if ($cart_id!='') {
 	       				</select>
 	       			</div>
 	       		</div>
-	       
+
        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary btn-success" onclick="check_address();" id="next_button">Next >></button>
+        
         <button type="button" class="btn btn-primary" onclick="back_address();" id="back_button" style="display: none;"><< Back</button>
-        <button type="submit" class="btn btn-primary" id="checkout_button" style="display: none;">Check Out</button>
+        <button type="button" class="btn btn-primary" onclick="back_address2();" id="back_button2" style="display: none;"><< Back</button>
+    <button type="button" class="btn btn-primary btn-success" id="next_button2" style="display: none;" onclick="submit_cardpayment();">Next >></button> 
+        <button type="submit" class="btn btn-primary btn-success" id="checkout_button" style="display: none;" >Check Out</button>
+      
         </form>
       </div>
     </div>
@@ -189,16 +212,72 @@ if ($cart_id!='') {
 	</div>
 </div>
 <script>
+$('#payment-form input[name=radio]').change(function() {       
+    
+    if(this.id=='cod'){
+    	 			/*jQuery('#step1').css("display","none");
+					jQuery('#step2').css("display","none");	
+					jQuery('#step3').css("display","block")	;		
+					jQuery('#next_button').css("display","none");*/
+					jQuery('#next_button2').css("display","none");				
+					/*jQuery('#back_button').css("display","none");
+					jQuery('#back_button2').css("display","inline-block");*/
+					jQuery('#checkout_button').css("display","inline-block");
+    }else{
+    				/*jQuery('#step1').css("display","none");
+					jQuery('#step2').css("display","none");	
+					jQuery('#step3').css("display","block")				
+					jQuery('#next_button').css("display","none");*/
+					jQuery('#next_button2').css("display","inline-block");			
+					/*jQuery('#back_button').css("display","inline-block");
+					jQuery('#back_button2').css("display","none");
+					jQuery('#checkoutModalLabel').html("Enter your card details:");*/
+					jQuery('#checkout_button').css("display","none");
+					
+
+    }
+});
 function back_address(){
-	jQuery('#payment-errors').html("");
+					jQuery('#payment-errors').html("");
 					jQuery('#step1').css("display","block");
-					jQuery('#step2').css("display","none");					
+					jQuery('#step2').css("display","none");	
+					jQuery('#step3').css("display","none");
+					jQuery('#next_button2').css("display","none");		
 					jQuery('#next_button').css("display","inline-block");					
 					jQuery('#back_button').css("display","none");
+					jQuery('#back_button2').css("display","none");
 					jQuery('#checkout_button').css("display","none");
 					jQuery('#checkoutModalLabel').html("Shipping Address:");
 }
-	function check_address(){
+function submit_cardpayment(){
+					jQuery('#payment-errors').html("");
+					jQuery('#step1').css("display","none");
+					jQuery('#step2').css("display","inline-block");	
+					jQuery('#step3').css("display","none");
+					jQuery('#next_button2').css("display","none");		
+					jQuery('#next_button').css("display","none");						
+					jQuery('#back_button').css("display","none");
+					jQuery('#back_button2').css("display","inline-block");
+					jQuery('#checkout_button').css("display","inline-block");
+					jQuery('#checkoutModalLabel').html("Enter your card details:");
+}
+function back_address2(){
+	jQuery('#payment-errors').html("");
+					jQuery('#step1').css("display","none");
+					jQuery('#step2').css("display","none");
+					jQuery('#step3').css("display","block");
+					jQuery('#next_button2').css("display","inline-block");						
+					jQuery('#next_button').css("display","none");				
+					jQuery('#back_button').css("display","inline-block");
+					jQuery('#back_button2').css("display","none");
+					jQuery('#checkout_button').css("display","none");
+					jQuery('#checkoutModalLabel').html("Select your Payment Mode");
+}
+
+
+
+
+	function check_address(){ 
 		var data={
 			'full_name':jQuery('#full_name').val(),
 			'email':jQuery('#email').val(),
@@ -222,42 +301,23 @@ function back_address(){
 				if (data.trim()=='passed') {
 					jQuery('#payment-errors').html("");
 					jQuery('#step1').css("display","none");
-					jQuery('#step2').css("display","block");					
+					jQuery('#step2').css("display","none");
+					jQuery('#step3').css("display","block");
+					jQuery('#next_button2').css("display","inline-block");	
+					jQuery('#next_button3').css("display","none");						
 					jQuery('#next_button').css("display","none");					
 					jQuery('#back_button').css("display","inline-block");
-					jQuery('#checkout_button').css("display","inline-block");
-					jQuery('#checkoutModalLabel').html("Enter your card details:");
+					jQuery('#checkout_button').css("display","none");
+					jQuery('#checkoutModalLabel').html("Select your Payment Mode");
+	       		
 
 				}
 			},
 			error:function(){
-				alert("Somwthing went wrong");
+				alert("Something went wrong");
 			},
 		});
 	}
 
-	/*Stripe.setPublishableKey('<?=STRIPE_PUBLIC;?>');
-
-	function stripeResponseHandler(status,response){
-		var $form=$('#payment-form');
-		if (response.error) {
-			$form.find('#payment-errors').text(response.error.message);
-			$form.find('button').prop('disabled',false);
-		}else{
-			var token=response.id;
-			$form.append($('<input type="hidden" name="stripeToken"/>').val(token));
-			$form.get(0).submit();
-		}
-
-	};
-
-	jQuery(function($){
-		$('#payment-form').submit(function(event){
-			var $form =$(this);
-			$form.find('button').prop('disabled',true);
-			$form.card.createToken($form,stripeResponseHandler);
-			return false;
-		});
-	});*/
 </script>
-<?php include 'includes/footer.php'; ?>
+<?php include 'includes/footer.php';  ?>

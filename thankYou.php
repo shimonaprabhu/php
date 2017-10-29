@@ -16,6 +16,8 @@ $sub_total=sanitize($_POST['sub_total']);
 $grand_total=sanitize($_POST['grand_total']);
 $cart_id=sanitize($_POST['cart_id']);
 $description=sanitize($_POST['description']);
+
+
 /*$charge_amount=number_format($grand_total,2)*100;*/
 $metadata=array(
 	"cart_id"=>$cart_id,
@@ -67,8 +69,22 @@ $metadata=array(
   include 'includes/navigation.php';
   include 'includes/headerfull.php';
   ?>
+  <!-- <script>
+
+$('#payment-form input[name=radio]').change(function() {       
+    
+    if(this.id=='cod'){
+    	jQuery('#pay').html("You have to pay on delivery")
+    	
+    	 			
+    }else{
+    				
+					
+
+    }
+});</script> -->
 <h1 class="text-center text-success">Thank you for shopping with us!</h1>
-<p>Your card has been successfully charged ₹<?=$grand_total;?>.<br>You have been emailed a copy of the receipt.</p>
+<p id="pay">Your total is ₹<?=$grand_total;?>.<br>Your consignment has been sent for processing.<br> You will recieve your package in the next 7 working days.<br> Retain a copy of this receipt.</p>
 <p>Your receipt number is: <strong><?=$cart_id;?></strong></p>
 <p>Your order will be shipped to:</p>
 <address>

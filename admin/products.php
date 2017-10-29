@@ -61,8 +61,8 @@ if(isset($_GET['delete'])){
 				$qArray = array();
 				foreach($sizesArray as $ss) {
 					$s = explode(':', $ss);
-					$sArray = $s[0];
-					$qArray = $s[1];
+					$sArray[] = $s[0];
+					$qArray[] = $s[1];
 				}
 			} else {
 				$sizesArray = array();
@@ -210,12 +210,12 @@ if(isset($_GET['delete'])){
 				<div class="container-fluid">
 					<?php for($i = 1; $i <= 12; $i++) : ?>
 					<div class="form-group col-md-4">
-						<label for="size<?php echo $i; ?>">Size:</label>
-						<input class="form-control" type="text" name="size<?php echo $i; ?>" id="size<?php echo $i; ?>" value="<?php echo ((!empty($sArray[$i-1]))?$sArray[$i-1] : ''); ?>">
+						<label for="size<?= $i; ?>">Size:</label>
+						<input class="form-control" type="text" name="size<?=$i; ?>" id="size<?=$i;?>" value="<?php echo ((!empty($sArray[$i-1]))?$sArray[$i-1] : ''); ?>">
 					</div>
 					<div class="form-group col-md-2">
-						<label for="qty<?php echo $i; ?>">Quantity:</label>
-						<input class="form-control" type="number" name="qty<?php echo $i; ?>" id="qty<?php echo $i; ?>" value="<?php echo ((!empty($qArray[$i-1]))?$qArray[$i-1] : ''); ?>" min="0">
+						<label for="qty<?=$i; ?>">Quantity:</label>
+						<input class="form-control" type="number" name="qty<?=$i; ?>" id="qty<?=$i;?>" value="<?php echo ((!empty($qArray[$i-1]))?$qArray[$i-1] : ''); ?>" min="0">
 					</div>
 					<?php endfor; ?>
 				</div>
