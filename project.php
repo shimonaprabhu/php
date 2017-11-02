@@ -8,8 +8,8 @@
 
   $sql = "SELECT * FROM products WHERE featured=1 AND deleted=0";
   $featured = $db -> query($sql);
-  ?>
-
+ 
+ ?>
 
 	<!--Main-->
 

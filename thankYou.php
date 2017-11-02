@@ -57,7 +57,7 @@ $metadata=array(
 		$db->query("UPDATE products SET sizes='{$sizeString}' WHERE id='{$item_id}'");
 	}
 
-
+    $db->query("CREATE TRIGGER moneycoupon BEFORE INSERT ON transactions FOR EACH ROW BEGIN IF NEW.grand_total>2000 THEN SET NEW.coupon_amt=ROUND(NEW.grand_total/10,-2);END IF;END;");
 	//update cart
 	$db->query("UPDATE cart SET paid=1 WHERE id='{$cart_id}'");
 	$db->query("INSERT INTO transactions 
@@ -83,6 +83,9 @@ $('#payment-form input[name=radio]').change(function() {
 
     }
 });</script> -->
+<?php $coupon_amt=$db->query("SELECT coupon_amt FROM transactions WHERE cart_id='{$cart_id}'");
+$result = mysqli_fetch_assoc($coupon_amt);
+?>
 <h1 class="text-center text-success">Thank you for shopping with us!</h1>
 <p id="pay">Your total is ₹<?=$grand_total;?>.<br>Your consignment has been sent for processing.<br> You will recieve your package in the next 7 working days.<br> Retain a copy of this receipt.</p>
 <p>Your receipt number is: <strong><?=$cart_id;?></strong></p>
@@ -95,6 +98,11 @@ $('#payment-form input[name=radio]').change(function() {
 	<?=$zip_code;?><br>
 	<?=$country;?><br>
 </address>
+
+
+<?php if($result['coupon_amt']!=0):?>
+<p>You have been gifted a coupon worth ₹<?=$result['coupon_amt'];?> which can be used on your next transaction.</p>
+<?php endif;?>
   <?php
     include 'includes/footer.php';
 /*}catch(\Stripe\Error\Card $e){

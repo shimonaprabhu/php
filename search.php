@@ -51,7 +51,7 @@
 		<?php if($cat_id!=''):?>
 			<h2 class="text-center"><?=$category['parent'].' '.$category['child'];?></h2>
 		<?php else: ?>
-			<h2 class="text-center">Shaunta's Boutique</h2>
+			<h2 class="text-center">Shop Till You Drop</h2>
 		<?php endif;?>
 				<?php while($product = mysqli_fetch_assoc($productQ)) : ?>
 

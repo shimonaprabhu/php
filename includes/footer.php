@@ -1,6 +1,6 @@
 </div>
 
-<footer class="text-center" id="footer">&copy;Copyright 2016-2017 Shop Till You Drop!</footer>
+<footer class="text-center" id="footer">&copy;Copyright Shop Till You Drop! <img href="favicon.jpg" rel="icon" type="image/jpg" /></footer>
 
 
 
@@ -45,11 +45,26 @@ function detailsmodal(id){
 
 }
 
+
+function update_cart(mode,edit_id,edit_size){
+    var data={"mode":mode,"edit_id":edit_id,"edit_size":edit_size};
+    jQuery.ajax({
+      url:'/E-Commerce/admin/parsers/update_cart.php',
+      method:"post",
+      data:data,
+      success:function(){location.reload();},
+      error:function(){alert('Something went wrong.');},
+
+    });
+}
+
+
+
 function add_to_cart(){
   jQuery('#modal_errors').html("");
   var size=jQuery('#size').val();
   var quantity = jQuery('#quantity').val();
-  var available = jQuery('#available').val();
+  var available = parseInt(jQuery('#available').val());
   var error='';
   var data=jQuery('#add_product_form').serialize();
   if(size==''||quantity==''||quantity==0){

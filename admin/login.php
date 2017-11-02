@@ -12,7 +12,7 @@
 	?>
 	<style >
 		body{
-			background-image: url("/E-Commerce/images/headerlogo/background.png");
+			background-image: url("../images/headerlogo/background2.jpg");
 			background-size: 100vw 100vh;
 			background-attachment: fixed;
 		}

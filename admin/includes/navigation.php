@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-    <a href="/E-Commerce/admin/index.php" class="navbar-brand">Online Shopping Admin</a>
+    <a href="/E-Commerce/admin/index.php" class="navbar-brand">Shop Till You Drop Admin</a>
      <ul class="nav navbar-nav">
      <li><a href="brands.php">Brands</a></li>
      <li><a href="categories.php">Categories</a></li>

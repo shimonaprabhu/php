@@ -44,7 +44,17 @@ if ($cart_id!='') {
 							<td><?=$i;?></td>
 							<td><?=$product['title'];?></td>
 							<td>₹<?=$product['price'];?></td>
-							<td><?=$item['quantity'];?></td>
+							<td>
+
+							<button class="btn btn-xs btn-default" onclick="update_cart('removeone','<?=$product['id'];?>','<?=$item['size'];?>');">-</button>
+
+							<?=$item['quantity'];?>
+							<?php if($item['quantity']<$available):?>
+								<button class="btn btn-xs btn-default" onclick="update_cart('addone','<?=$product['id'];?>','<?=$item['size'];?>');">+</button>
+							<?php else:?>
+									<span class="text-danger">Max Limit</span>
+							<?php endif;?>
+							</td>
 							<td><?=$item['size'];?></td>
 							<td>₹<?=$item['quantity']*$product['price'];?></td>
 
@@ -100,7 +110,7 @@ if ($cart_id!='') {
 	       <input type="hidden" name="sub_total" value="<?=$sub_total;?>">
 	       <input type="hidden" name="grand_total" value="<?=$grand_total;?>">
 	       <input type="hidden" name="cart_id" value="<?=$cart_id;?>">
-	       <input type="hidden" name="description" value="<?=$item_count.' item'.(($item_count>1)?'s':'').' from Shauntas Boutique.';?>">
+	       <input type="hidden" name="description" value="<?=$item_count.' item'.(($item_count>1)?'s':'').' from Shop Till You Drop.';?>">
 
 	       		<div id="step1" style="display: block;">
 	       			<div class="form-group col-md-6">
